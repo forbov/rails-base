@@ -1,0 +1,26 @@
+// Custom bootstrap variables must be set or imported *before* bootstrap.
+$computability-primary: #00968f;
+$computability-1: #00fff4;
+$computability-2: #35d0ba;
+$computability-3: #fefed5;
+$computability-dark: #002d2b;
+$computability-white: #ffffff;
+
+$primary: $computability-primary;
+
+.bg-computability-1 {
+  --bs-bg-opacity: 1;
+  background-color: $computability-1;
+}
+
+.bg-computability-2 {
+  --bs-bg-opacity: 1;
+  background-color: $computability-2;
+}
+
+.bg-computability-3 {
+  --bs-bg-opacity: 1;
+  background-color: $computability-3;
+}
+
+@import "bootstrap";
