@@ -1,0 +1,47 @@
+<% if user_signed_in? %>
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <li class="nav-item">
+      <%= link_to root_path, class: "nav-link active", aria: {current: "page"} do %>
+        <span class="fi-home"></span> Home
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to users_path, class: "nav-link" do %>
+        <span class="fi-torsos-all"></span> Users
+      <% end %>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Dropdown
+      </a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+      </ul>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+    </li>
+  </ul>
+<% end %>
+<ul class="nav navbar-nav navbar-right">
+  <li class="nav-item">
+    <% if User.any? %>
+      <% if user_signed_in? %>
+        <%= link_to destroy_user_session_path, data: {turbo_method: :delete}, class: "nav-link" do %>
+          <span class="fi-lock"></span> Sign Out
+        <% end %>
+      <% else %>
+        <%= link_to login_path, class: "nav-link" do %>
+          <span class="fi-unlock"></span> Sign In
+        <% end %>
+      <% end %>
+    <% else %>
+      <%= link_to new_user_registration_path, class: "nav-link" do %>
+        <span class="fi-torso"></span> Set Admininstrator
+      <% end %>
+    <% end %>
+  </li>
+</ul>

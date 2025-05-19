@@ -1,0 +1,25 @@
+<%= render 'layouts/page_title', page_title: 'Send Invitation', page_subtitle: nil %>
+<div class="container border shadow bg-light bg-gradient">
+  <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="row my-3">
+      <div class="col-md-9 col-lg-10 order-md-1 order-2">
+        <% resource.class.invite_key_fields.each do |field| -%>
+          <div class="row my-3">
+            <div class="col-md-3 text-md-end">
+              <%= f.label field, class: "form-label" %>
+            </div>
+            <div class="col-md">
+              <%= f.text_field field, class: "form-control" %>
+            </div>
+          </div>
+        <% end -%>
+      </div>
+      <div class="col-md-3 col-lg-2 order-md-2 order-1">
+        <div class="d-grid my-3">
+          <%= f.submit t("devise.invitations.new.submit_button"), class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

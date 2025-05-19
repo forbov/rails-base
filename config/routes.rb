@@ -1,5 +1,22 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { confirmations: "users/confirmations",
+                                    registrations: "users/registrations",
+                                    sessions: "users/sessions",
+                                    invitations: "users/invitations" }
+
+  get "users/:id" => "users#show", as: :user
+
+  devise_scope :user do
+    get "/sign-in" => "devise/sessions#new", :as => :login
+  end
+
+  resources :users, only: %i[index] do
+    member do
+      patch :lock_or_unlock
+      patch :resend
+      get :dashboard
+    end
+  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
