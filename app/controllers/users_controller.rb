@@ -4,7 +4,10 @@ class UsersController < ApplicationController
 
 
   def index
-    @users = User.where(active: true).order(:email)
+    search_name = (params[:search_name] if params[:search_name] && !params[:search_name].empty?)
+    search_role = (params[:search_role] if params[:search_role] && !params[:search_role].empty?)
+
+    @users = User.search(search_name, search_role)
   end
 
   def show

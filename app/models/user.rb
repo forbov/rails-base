@@ -50,4 +50,23 @@ class User < ApplicationRecord
                          raw_token: raw_invitation_token).new_administrator_email.deliver_later
     end
   end
+
+  def self.search(search_name, search_role)
+    search_name = "" if search_name.nil?
+    search_role = "" if search_role.nil?
+
+    sql = "
+      select distinct usr.*
+        from users usr
+       inner join users_roles url
+          on url.user_id = usr.id
+       inner join roles rol
+          on rol.id = url.role_id
+         and rol.name like '%#{search_role}%'
+       where lower(concat(usr.first_name, usr.last_name)) like '%#{search_name.downcase}%'
+       order by usr.last_name
+           , usr.first_name"
+
+    find_by_sql(sql)
+  end
 end
