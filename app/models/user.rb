@@ -64,6 +64,7 @@ class User < ApplicationRecord
           on rol.id = url.role_id
          and rol.name like '%#{search_role}%'
        where lower(concat(usr.first_name, usr.last_name)) like '%#{search_name.downcase}%'
+         and usr.active = true
        order by usr.last_name
            , usr.first_name"
 
