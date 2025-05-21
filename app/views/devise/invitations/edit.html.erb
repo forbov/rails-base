@@ -5,10 +5,16 @@
     <%= f.hidden_field :invitation_token, readonly: true %>
     <div class="row my-3">
       <div class="col-md-9 col-lg-10 order-md-1 order-2">
+        <div class="row my-3">
+          <div class="col text-center">
+            <h5><%= resource.full_name %></h5>
+            <%= resource.email %>
+          </div>
+        </div>
         <% if f.object.class.require_password_on_accepting %>
           <div class="row my-3">
             <div class="col-md-3 text-md-end">
-              <%= f.label :password, class: "form-label" %><br />
+              <%= f.label :password, class: "form-label" %>
             </div>
             <div class="col-md">
               <%= f.password_field :password, class: "form-control" %>
@@ -16,7 +22,7 @@
           </div>
           <div class="row my-3">
             <div class="col-md-3 text-md-end">
-              <%= f.label :password_confirmation, class: "form-label" %><br />
+              <%= f.label :password_confirmation, class: "form-label" %>
             </div>
             <div class="col-md">
               <%= f.password_field :password_confirmation, class: "form-control" %>
@@ -30,5 +36,6 @@
         </div>
       </div>
     </div>
-  <% end %>
+  </div>
+<% end %>
 </div>

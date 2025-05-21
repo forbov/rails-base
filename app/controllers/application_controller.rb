@@ -4,6 +4,17 @@ class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 
+  def configure_permitted_parameters
+    additional_attributes = %i[first_name last_name mobile_phone user_role_id created_by updated_by]
+    devise_parameter_sanitizer.permit :account_update, keys: additional_attributes
+    devise_parameter_sanitizer.permit :sign_up, keys: additional_attributes
+    devise_parameter_sanitizer.permit :invite, keys: additional_attributes
+  end
+
+  rescue_from CanCan::AccessDenied do |_exception|
+    redirect_to root_path, alert: "Access denied. You are not authorized to access the requested page."
+  end
+
   protected
 
   def authenticate_user!(opts = {})
@@ -21,12 +32,5 @@ class ApplicationController < ActionController::Base
     session[:user_email] = current_user.email
     session[:user_role] = current_user.role_desc
     root_path(resource)
-  end
-
-  def configure_permitted_parameters
-    update_attrs = %i[first_name last_name mobile_phone created_by updated_by]
-    devise_parameter_sanitizer.permit :account_update, keys: update_attrs
-    devise_parameter_sanitizer.permit :sign_up, keys: update_attrs
-    devise_parameter_sanitizer.permit :invite, keys: update_attrs
   end
 end

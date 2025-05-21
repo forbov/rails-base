@@ -1,6 +1,9 @@
-<%= render 'layouts/page_title', page_title: 'Send Invitation', page_subtitle: nil %>
+<%= render 'layouts/page_title', page_title: @page_title, page_subtitle: nil %>
 <div class="container border shadow bg-light bg-gradient">
   <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post }) do |f| %>
+    <%= f.hidden_field :user_role_id, value: @user_role.name %>
+    <%= f.hidden_field :created_by, value: current_user.id %>
+    <%= f.hidden_field :updated_by, value: current_user.id %>
     <%= render "devise/shared/error_messages", resource: resource %>
     <div class="row my-3">
       <div class="col-md-9 col-lg-10 order-md-1 order-2">
@@ -17,7 +20,7 @@
       </div>
       <div class="col-md-3 col-lg-2 order-md-2 order-1">
         <div class="d-grid my-3">
-          <%= f.submit t("devise.invitations.new.submit_button"), class: "btn btn-primary" %>
+          <%= f.submit @submit_label, class: "btn btn-primary" %>
         </div>
       </div>
     </div>

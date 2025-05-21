@@ -1,2 +1,15 @@
-<h1>Home#welcome</h1>
-<p>Find me in app/views/home/welcome.html.erb</p>
+<%= render 'layouts/page_title', page_title: "Welcome", page_subtitle: nil %>
+<% unless SystemCode.any? %>
+  <div class="alert alert-danger" role="alert">
+    <strong>Setup not Complete. </strong><br>
+    Load static data by running rails db:seed.
+  </div>
+<% else %>
+  <div class="container border shadow bg-light bg-gradient">
+    <div class="row my-3">
+      <div class="col text-center">
+        <%= image_tag "logo_480" %>
+      </div>
+    </div>
+  </div>
+<% end %>

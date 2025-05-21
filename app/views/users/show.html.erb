@@ -1,0 +1,41 @@
+<%= render 'layouts/page_title', page_title: 'User', page_subtitle: nil %>
+<div class="container border shadow bg-light bg-gradient">
+  <div class="row my-3">
+    <div class="col-md-9 col-lg-10 order-md-1 order-2">
+      <%= render @user, summary: false %>
+    </div>
+    <div class="col-md-3 col-lg-2 order-md-2 order-1">
+      <% if can? :create, User %>
+        <% if current_user.admin? %>
+          <div class="d-grid my-3">
+            <%= link_to "Add Administrator", new_user_invitation_path(user_role_id: "SYS_ADMIN"), class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      <% end %>
+      <% if @user.id == current_user.id %>
+        <div class="d-grid my-3">
+          <%= link_to "Change Details", edit_user_registration_path, class: "btn btn-primary" %>
+        </div>
+      <% end %>
+      <% if can?(:resend, @user) && @user.created_by_invite? %>
+        <% unless @user.invitation_accepted? %>
+          <%= button_to 'Resend Invite', resend_user_path(@user), {method: :patch, form_class: "d-grid my-3", class: "btn btn-primary"} %>
+        <% end %>
+      <% end %>
+      <% if can?(:lock_or_unlock, @user) && @user.id != current_user.id %>
+        <% if @user.access_locked? %>
+          <%= button_to 'Unlock Access', lock_or_unlock_user_path(@user), {method: :patch, form_class: "d-grid my-3", class: "btn btn-primary"} %>
+        <% else %>
+          <%= button_to 'Lock Access', lock_or_unlock_user_path(@user), {method: :patch, form_class: "d-grid my-3", class: "btn btn-primary"} %>
+        <% end %>
+        <%= button_to "Cancel account", user_path(@user), {data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, form_class: "d-grid my-3", class: "btn btn-danger"} %>
+      <% end %>
+      <div class="d-grid my-3">
+        <%= link_to users_path, class: "btn btn-secondary" do %>
+          <i class="fi-previous"></i>&nbsp;Users
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

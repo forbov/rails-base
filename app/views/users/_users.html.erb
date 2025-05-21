@@ -1,15 +1,13 @@
 <% users = collection %>
 <% unless users.empty? %>
   <% users = Kaminari.paginate_array(users).page(params[:page]) %>
-  <table>
+  <table class="table table-striped table-hover table-sm">
     <thead>
       <tr>
         <th>Name</th>
-        <th class="d-md">Email</th>
-        <th class="d-lg">Mobile</th>
-        <% unless source == 'facilitators' %>
-          <th>Roles</th>
-        <% end %>
+        <th class="d-none d-md-table-cell">Email</th>
+        <th class="d-none d-lg-table-cell">Mobile</th>
+        <th>Roles</th>
       </tr>
     </thead>
     <tbody>
@@ -17,18 +15,14 @@
         <tr>
           <td>
             <% if can? :read, user %>
-              <%= link_to user do %>
-                <%= user.full_name %>
-              <% end %>
+              <%= link_to user.full_name, user %>
             <% else %>
               <div><%= user.full_name %></div>
             <% end %>
           </td>
-          <td class="d-md"><%= user.email %></td>
-          <td class="d-lg"><%= user.mobile_phone %></td>
-          <% unless source == 'facilitators' %>
-            <td><%= user.role_desc %></td>
-          <% end %>
+          <td class="d-none d-md-table-cell"><%= user.email %></td>
+          <td class="d-none d-lg-table-cell"><%= user.mobile_phone %></td>
+          <td><%= user.role_desc %></td>
         </tr>
       <% end %>
     </tbody>

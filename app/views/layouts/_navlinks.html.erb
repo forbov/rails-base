@@ -1,13 +1,13 @@
-<% if user_signed_in? %>
-  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-    <li class="nav-item">
-      <%= link_to root_path, class: "nav-link active", aria: {current: "page"} do %>
-        <span class="fi-home"></span> Home
-      <% end %>
-    </li>
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  <li class="nav-item">
+    <%= link_to root_path, class: "nav-link active", aria: {current: "page"} do %>
+      <span class="fi-home"></span> Home
+    <% end %>
+  </li>
+  <% if user_signed_in? %>
     <li class="nav-item">
       <%= link_to users_path, class: "nav-link" do %>
-        <span class="fi-torsos-all"></span> Users
+        <span class="fi-torsos -all"></span> Users
       <% end %>
     </li>
     <li class="nav-item dropdown">
@@ -24,8 +24,8 @@
     <li class="nav-item">
       <a class="nav-link disabled" aria-disabled="true">Disabled</a>
     </li>
-  </ul>
-<% end %>
+  <% end %>
+</ul>
 <ul class="nav navbar-nav navbar-right">
   <li class="nav-item">
     <% if User.any? %>

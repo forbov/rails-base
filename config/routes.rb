@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     member do
       patch :lock_or_unlock
       patch :resend
+      delete :destroy
       get :dashboard
     end
   end

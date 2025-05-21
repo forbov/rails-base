@@ -1,2 +1,17 @@
 <%= render 'layouts/page_title', page_title: 'Users', page_subtitle: nil %>
-<%= render 'users', collection: @users, source: 'users' %>
+<div class="container border shadow bg-light bg-gradient">
+  <div class="row my-3">
+    <div class="col-md-9 col-lg-10 order-md-1 order-2">
+      <%= render 'users', collection: @users, source: 'users' %>
+    </div>
+    <div class="col-md-3 col-lg-2 order-md-2 order-1">
+      <% if can? :create, User %>
+        <% if current_user.admin? %>
+          <div class="d-grid my-3">
+            <%= link_to "Add Administrator", new_user_invitation_path(user_role_id: "SYS_ADMIN"), class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,123 @@
+<wrapper class="header">
+  <container>
+    <row class="collapse">
+      <columns small="6">
+        <h1 style="color:white;">READY TO GO!</h1>
+      </columns>
+      <columns small="6">
+        <p class="text-right subheader">TRACTON Programs Reporting System</p>
+      </columns>
+    </row>
+  </container>
+</wrapper>
+
+<container>
+
+  <spacer size="16"></spacer>
+
+  <row>
+    <columns>
+      
+        <p class="lead">
+            We're delighted to welcome you to the TRACTION Programs Reporting System!
+        <callout class="primary">TRACTION is a community-based, not-for-profit organisation, aimed at helping young people discover their talents, build self-belief and create their own positive and successful futures.</callout>
+        <p>
+          To access the system, please <a href="<%= @invitation %>">login</a>. 
+        </p>
+        <p>  
+          This system is our primary system to capture our incredible achievements and identify improvements. Once you have logged in, you will have <strong>Administrator</strong> access to coordinate workshops. Please do not hesitate to contact your manager should you have any enquiries.
+        </p>
+        <spacer size="16"></spacer>
+        <center>
+            <button class="large" href="<%= @invitation %>">Login to Register</button>
+        </center>
+        <spacer size="16"></spacer>
+        
+      </p>
+      <center>
+        <img src="https://images.squarespace-cdn.com/content/v1/6267803c06b6d567fc960ee8/2f794233-85e8-447f-814c-afbd855ab16e/TRACTION_Logo_Corporate.png?format=1500w" style="max-width:400px;" alt="TRACTION logo">
+      </center>
+      <spacer size="16"></spacer>
+    </columns>
+  </row>
+</container>
+<spacer size="32"></spacer>
+<container>
+  <spacer size="16"></spacer>
+  <row>
+    <columns small="12" large="7">
+      <h3>Hi <%= @user.first_name %>,</h3>
+      <p>
+        We are delighted to serve local schools and community groups with a variety of TRACTION custom build programs. TRACTION is a community-based not-for-profit charitable organisation that helps young people discover their talents, build self-belief, and create their own positive and successful futures.
+      </p>
+      <callout class="success">
+        <h3>You're a <em>real model</em> for our young people, and our mentors</h3>
+        <ul>
+          <li>Be present</li>
+          <li>Be patient</li>
+          <li>Be an active listener</li>
+          <li>Be curious</li>
+        </ul>
+      </callout>
+      <p>
+        At TRACTION, we understand that everybody learns differently and that some students do not realise their full potential in a traditional classroom. Our programs support the development of practical skills in a real-life learning environment and our focus is nurturing communication and broader life skills, as we are not a registered training organisation (RTO).
+      </p>
+      <p>
+        These programs are flexible in design and are normally delivered over the course of a school term (1 day per week).
+      </p>
+      <p>
+        TRACTION Mentors guide and support young people through their chosen programs, while imparting their expertise, life experience, technical and social skills. Participants complete activities such as designing, building and making functional items including bicycles, small bluetooth speaker systems. Those engaging in Fuel-up also learn about healthy food choices through preparing simple nutritious meals. These programs allow creativity, independence, empowerment and ownership.
+      </p>
+      <p>
+        We're excited to have you as a <em>real model</em> for our your young people at our TRACTION programs.
+      </p>
+    </p>
+    </columns>
+    <columns small="12" large="5">
+        <callout class="primary">
+            <p class="lead">KEY PROGRAM OBJECTIVES:</p>
+            <ul>
+              <li>Increase self-esteem and social skills</li>
+              <li>Increase school attendance and achievement</li>
+              <li>Improve future employment opportunities</li>
+              <li>Improve life skills</li>
+              <li>Offer community and mentor support</li>
+              <li>Promote active and healthy lifestyles</li>
+            </ul>
+        </callout>  
+        <callout class="primary">
+            TRACTION propels young people through the delivery of action-based learning programs. 
+        </callout>
+        <callout class="primary">
+          <p class="lead">TRACTION programs include:</p>
+          <ul>
+            <li>Bike Build Program</li>
+            <li>Boom Box Program</li>
+            <li>Fuel-up Program</li>
+            <li>Take the lead Program</li>
+          </ul>
+        </callout>
+    </columns>
+  </row>
+  
+
+</container>
+<wrapper class="footer">
+  <spacer size="16"></spacer>  
+  <container>
+        <row class="collapse">
+          <h5 class="text-center" style="color:white;">CONNECT WITH US</h5>
+        </row>
+        <row>
+          <columns small="4">
+            <button class="socials expand" href="https://traction.community">Website</button>
+          </columns>
+          <columns small="4">
+            <button class="socials expand" href="https://www.facebook.com/tractionbuilds/">Facebook</button>
+          </columns>
+          <columns small="4">
+            <button class="socials expand" href="https://www.instagram.com/tractionbuilds/">Instagram</button>
+          </columns>
+        </row>
+    </container>
+</wrapper>

@@ -153,7 +153,7 @@ Devise.setup do |config|
   # The key to be used to check existing users when sending an invitation
   # and the regexp used to test it when validate_on_invite is not set.
   # config.invite_key = { email: /\A[^@]+@[^@]+\z/ }
-  # config.invite_key = { email: /\A[^@]+@[^@]+\z/, username: nil }
+  config.invite_key = { email: /\A[^@]+@[^@]+\z/, first_name: nil, last_name: nil, mobile_phone: nil }
 
   # Ensure that invited record is valid.
   # The invitation won't be sent if this check fails.

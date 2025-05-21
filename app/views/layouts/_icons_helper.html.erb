@@ -1,0 +1,24 @@
+<% case field_value.to_s.downcase %>
+<% when "true" %>
+  <i class="fi-check" style="color:green"></i>
+<% when "false" %>
+  <i class="fi-x" style="color:red"></i>
+<% when "full" %>
+  <i class="fi-checkbox" style="color:green"></i>
+<% when "restricted" %>
+  <i class="fi-alert" style="color:orange"></i>
+<% when "none" %>
+  <i class="fi-prohibited" style="color:red"></i>
+<% when "rating" %>
+  <% score.to_i.times do %>
+    <i class="fi-star"></i>
+  <% end %>
+  <% remaining = (defined?(limit) ? limit.to_i : 5) - score.to_i %>
+  <span style="opacity:10%">
+    <% remaining.times do %>
+      <i class="fi-star"></i>
+    <% end %>
+  </span>
+<% else %>
+  <i class="fi-info" style="color:blue"></i>
+<% end %>

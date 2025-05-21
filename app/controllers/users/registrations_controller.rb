@@ -17,6 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
     if @user.save
       @user.add_role(ADMIN_ROLE)
+
       session[:user_email] = @user.email
       session[:user_role] = @user.role_desc
     end

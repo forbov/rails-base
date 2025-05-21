@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: %i[show dashboard lock_or_unlock resend]
+  before_action :set_user, only: %i[show dashboard lock_or_unlock resend destroy]
 
 
   def index
-    @users = User.all
+    @users = User.where(active: true).order(:email)
   end
 
   def show
@@ -17,10 +17,10 @@ class UsersController < ApplicationController
     notice_text = nil
     if @user.access_locked?
       @user.unlock_access!
-      notice_text = 'unlocked'
+      notice_text = "unlocked"
     else
       @user.lock_access!
-      notice_text = 'locked'
+      notice_text = "locked"
     end
     redirect_to users_path, notice: "User #{@user.email} access #{notice_text}"
   end
@@ -32,7 +32,13 @@ class UsersController < ApplicationController
     else
       redirect_to users_path, alert: "User #{@user.email} already active"
     end
-  end  
+  end
+
+  def destroy
+    @user.active = false
+    @user.save
+    redirect_to users_path, notice: "User was successfully deleted."
+  end
 
   private
   def set_user

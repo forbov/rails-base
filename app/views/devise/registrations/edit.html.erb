@@ -1,4 +1,4 @@
-<%= render 'layouts/page_title', page_title: "Edit #{resource.to_s.humanize}", page_subtitle: nil %>
+<%= render 'layouts/page_title', page_title: "Edit #{resource.full_name}", page_subtitle: nil %>
 <div class="container border shadow bg-light bg-gradient">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
@@ -75,10 +75,9 @@
           <%= f.submit "Update", class: "btn btn-primary" %>
         </div>
         <div class="d-grid my-3">
-          <%= link_to "Back", :back, class: "btn btn-secondary" %>
-        </div>
-        <div class="d-grid my-3">
-          <%= button_to "Cancel account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger" %>
+          <%= link_to resource, class: "btn btn-secondary" do %>
+            <i class="fi-previous"></i>&nbsp;User
+          <% end %>
         </div>
       </div>
     </div>
