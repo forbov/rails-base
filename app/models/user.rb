@@ -13,6 +13,12 @@ class User < ApplicationRecord
   attr_accessor :user_role_id
   attr_reader :raw_invitation_token
 
+  delegate :can?, :cannot?, to: :ability
+
+  def ability
+    @ability ||= Ability.new(self)
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end

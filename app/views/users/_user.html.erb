@@ -13,14 +13,14 @@
         </tr>
         <% if can? :lock_or_unlock, user %>
           <tr>
-            <th><span class="d-none d-md-inline">Access </span>Locked</th>
-            <td><%= render "layouts/icons_helper", field_value: user.access_locked? %></td>
+            <th>Access</th>
+            <td><%= render "layouts/icons_helper", field_value: user.access_locked?, field_type: "lock" %></td>
           </tr>
         <% end %>
         <% if can?(:resend, user) && user.created_by_invite? %>
           <tr>
             <th><span class="d-none d-md-inline">Invitation </span>Accepted</th>
-            <td><%= render "layouts/icons_helper", field_value: user.invitation_accepted? %></td>
+            <td><%= render "layouts/icons_helper", field_value: user.invitation_accepted?, field_type: "yes_no" %></td>
           </tr>
         <% end %>
         <tr>

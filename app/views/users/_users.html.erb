@@ -1,6 +1,8 @@
 <% users = collection %>
 <% unless users.empty? %>
-  <% users = Kaminari.paginate_array(users).page(params[:page]) %>
+  <% if source == 'index' %>
+    <% users = Kaminari.paginate_array(users).page(params[:page]) %>
+  <% end %>
   <table class="table table-striped table-hover table-sm">
     <thead>
       <tr>
@@ -14,10 +16,10 @@
       <% users.each do |user| %>
         <tr>
           <td>
-            <% if can? :read, user %>
-              <%= link_to user.full_name, user %>
+            <% if current_user.can? :read, user %>
+              <%= link_to user.full_name, url.user_path(user) %>
             <% else %>
-              <div><%= user.full_name %></div>
+              <%= user.full_name %>
             <% end %>
           </td>
           <td class="d-none d-md-table-cell"><%= user.email %></td>
@@ -27,12 +29,16 @@
       <% end %>
     </tbody>
   </table>
-  <% if users.total_pages > 1 %>
-    <div class="container small">
-      <div class="row text-center">
-        <%= paginate users %>
-        <%= page_entries_info users %>
+  <% if source == 'index' %>
+    <% if users.total_pages > 1 %>
+      <div class="container small">
+        <div class="row text-center my-3">
+          <div class="col">
+            <%= paginate users %>
+            <%= page_entries_info users %>
+          </div>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 <% end %>

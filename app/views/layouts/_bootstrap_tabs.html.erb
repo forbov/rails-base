@@ -1,0 +1,12 @@
+<% unless bootstrap_tabs.is_empty? %>
+  <div class="row my-3">
+    <div class="col">
+      <ul class="nav nav-tabs" id="bootstrapTab" role="tablist">
+        <%= bootstrap_tabs.render_tab_header.html_safe %>
+      </ul>
+      <div class="tab-content" id="bootstrapTabContent">
+        <%= bootstrap_tabs.render_tab_body.html_safe %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
+  load_and_authorize_resource
   before_action :authenticate_user!
   before_action :set_user, only: %i[show dashboard lock_or_unlock resend destroy]
+  before_action :set_tabs, only: %i[show dashboard]
 
 
   def index
@@ -46,5 +48,29 @@ class UsersController < ApplicationController
   private
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def set_tabs
+    @users_all = User.all
+    @users_active = User.where(active: true)
+    @users_inactive = User.where(active: false)
+
+    tabs = { users_all: { label: "All",
+                          render: "users",
+                          dataset: @users_all,
+                          parent: @user,
+                          source: "user" },
+             users_active: { label: "Active",
+                             render: "users",
+                             dataset: @users_active,
+                             parent: @user,
+                             source: "user" },
+             users_inactive: { label: "Inactive",
+                               render: "users",
+                               dataset: @users_inactive,
+                               parent: @user,
+                               source: "user" } }
+
+    @bootstrap_tabs = BootstrapTabs.new(tabs, current_user, params)
   end
 end
