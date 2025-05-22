@@ -1,11 +1,12 @@
+<% field = field_value.to_s.downcase %>
 <% if field_type == "lock" %>
-  <% if field_value == "true" %>
+  <% if field == "true" %>
     <i class="fi-lock" style="color:red"></i>
   <% else %>
     <i class="fi-unlock" style="color:green"></i>
   <% end %>
 <% else %>
-  <% case field_value.to_s.downcase %>
+  <% case field %>
   <% when "true" %>
     <i class="fi-check" style="color:green"></i>
   <% when "false" %>
