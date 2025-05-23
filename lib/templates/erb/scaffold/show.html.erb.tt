@@ -4,7 +4,7 @@
 <div class="container border shadow bg-light bg-gradient">
   <div class="row my-3">
     <div class="col-md-9 col-lg-10 order-md-1 order-2">
-      <%%= render @<%= singular_table_name %>, summary: false %>
+      <%%= render @<%= singular_table_name %>, <%= singular_table_name %>: @<%= singular_table_name %>, summary: false %>
     </div>
     <div class="col-md-3 col-lg-2 order-md-2 order-1">
       <%% if can? :edit, @<%= singular_table_name %> %>
@@ -19,7 +19,7 @@
       <%% end %>
       <div class="d-grid my-3">
         <%%= link_to <%= index_helper %>_path, class: "btn btn-secondary" do %>
-          <i class="fi-previous"></i>&nbsp;<%= plural_table_name %>
+          <i class="fi-previous"></i>&nbsp;<%= plural_table_name.titleize %>
         <%% end %>
       </div>
     </div>
@@ -31,14 +31,19 @@
 <%%# Move the following section to a file named '_<%= singular_table_name %>.html.erb' %>
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title"><%%= <%= singular_table_name %>.choose_identifying_attribute %></h5>
+<% attribute_count = 0 %>
+<% attributes.reject(&:password_digest?).each do |attribute| -%>
+  <% attribute_count += 1 %>
+  <% if attribute_count == 1 %>
+    <h5 class="card-title"><%%= <%= singular_table_name %>.<%= attribute.column_name %> %></h5>
     <div class="card-text">
       <table class="table table-striped table-hover table-sm">
-<% attributes.reject(&:password_digest?).each do |attribute| -%>
+  <% elsif attribute.column_name != "active" && attribute.column_name != "created_by" && attribute.column_name != "updated_by" %>
         <tr>
           <th class="medium-text-right"><%= attribute.human_name %></th>
           <td><%%= <%= singular_table_name %>.<%= attribute.column_name %> %></td>
         </tr>
+  <% end %>
 <% end -%>
       </table>
     </div>

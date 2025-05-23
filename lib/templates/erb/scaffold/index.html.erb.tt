@@ -12,7 +12,7 @@
         </h5>
         <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionSearch">
           <div class="accordion-body">
-            <%= form_tag users_path, method: :get do %>
+            <%%= form_tag <%= index_helper %>_path, method: :get do %>
               <div class="container">
                 <div class="row my-3">
                   <div class="col-md-3 text-md-end">
@@ -27,11 +27,11 @@
                     <%%= submit_tag "Search", class: "btn btn-primary" %>
                   </div>
                   <div class="col d-grid my-3">
-                    <%%= link_to "All Users", users_path, class: "btn btn-primary" %>
+                    <%%= link_to "All <%= plural_table_name.titleize %>", <%= index_helper %>_path, class: "btn btn-primary" %>
                   </div>
                 </div>
               </div>
-            <% end %>
+            <%% end %>
           </div>
         </div>
       </div>
@@ -39,11 +39,13 @@
   </div>
   <div class="row my-3">
     <div class="col-md-9 col-lg-10 order-md-1 order-2">
-      <%%= render '<%= plural_table_name %>', collection: @<%= plural_table_name %>, source: 'index', url: Rails.application.routes.url_helpers, current_user: current_user %> %>
+      <%%= render '<%= plural_table_name %>', collection: @<%= plural_table_name %>, source: 'index', url: Rails.application.routes.url_helpers, current_user: current_user %>
     </div>
     <div class="col-md-3 col-lg-2 order-md-2 order-1">
-      <%% if can? :create, <% singular_table_name.titleize %> %>
-        <%%= link_to "New <%= singular_table_name.titleize %>", new_<%= singular_route_name %>_path, class: "button expanded" %>
+      <%% if can? :create, <%= singular_table_name.titleize.gsub(' ', '') %> %>
+        <div class="d-grid my-3">
+          <%%= link_to 'New <%= singular_table_name.titleize %>', new_<%= singular_route_name %>_path, class: "btn btn-primary" %>
+        </div>
       <%% end %>
     </div>
   </div>
@@ -54,19 +56,20 @@
 
 <%% <%= plural_table_name %> = collection %>
 <%% unless <%= plural_table_name %>.empty? %>
-  <% if source == 'index' %>
-    <%% <%= plural_table_name %> = Kaminari.paginate_array(<%= plural_table_name %>).page(params[:page]).per(kaminari_per_page) %>
-  <% end %>
+  <%% if source == 'index' %>
+    <%% <%= plural_table_name %> = Kaminari.paginate_array(<%= plural_table_name %>).page(params[:page]) %>
+  <%% end %>
   <table class="table table-striped table-hover table-sm">
     <thead>
       <tr>
 <% attribute_count = 0 %>        
 <% attributes.reject(&:password_digest?).each do |attribute| -%>
-  <% attribute_count += 1 %>
-  <% if attribute_count != 1 %>
+  <% if attribute.column_name != "active" && attribute.column_name != "created_by" && attribute.column_name != "updated_by" %>
+    <% attribute_count += 1 %>
+    <% if attribute_count != 1  %>
         <%%# To hide on small screens: %>
         <th class="d-none d-md-table-cell"><%= attribute.human_name %></th>
-  <% else %>
+    <% end %>
         <th><%= attribute.human_name %></th>
   <% end %>
 <% end %>
@@ -74,26 +77,32 @@
     </thead>
     <tbody>
       <%% <%= plural_table_name %>.each do |<%= singular_table_name %>| %>
-        <tr>
+      <tr>
 <% attribute_count = 0 %>        
 <% attributes.reject(&:password_digest?).each do |attribute| -%>
-  <% attribute_count += 1 %>
-  <% if attribute_count == 1 %>
-            <td>
-              <%% if can? :read, <%= singular_table_name %> %>
-                <%%= link_to <%%= <%= singular_table_name %>.<%= attribute.column_name %> %>, <%= singular_table_name %> %>
-              <%% end %>
-            </td>
-  <% else %>
-            <%%# To hide on small screens: %>
-            <td class="d-none d-md-table-cell"><%%= <%= singular_table_name %>.<%= attribute.column_name %> %></td>
-            <td><%%= <%= singular_table_name %>.<%= attribute.column_name %> %></td>
-  <% end %>            
+  <% if attribute.column_name != "active" && attribute.column_name != "created_by" && attribute.column_name != "updated_by" %>
+    <% attribute_count += 1 %>
+    <% if attribute_count == 1 %>
+        <td>
+          <%% if can? :read, <%= singular_table_name %> %>
+            <%%= link_to <%= singular_table_name %>.<%= attribute.column_name %>, <%= singular_table_name %> %>
+          <%% else %>
+            <%%= <%= singular_table_name %>.<%= attribute.column_name %> %>
+          <%% end %>
+        </td>
+    <% else %>
+        <%%# To hide on small screens: %>
+        <td class="d-none d-md-table-cell"><%%= <%= singular_table_name %>.<%= attribute.column_name %> %></td>
+        <td><%%= <%= singular_table_name %>.<%= attribute.column_name %> %></td>
+    <% end %>
+  <% end %>          
 <% end %>
+      </tr>
+    <%% end %>
     </tbody>
   </table>
-  <% if source == 'index' %>
-    <% if <%= plural_table_name %>.total_pages > 1 %>
+  <%% if source == 'index' %>
+    <%% if <%= plural_table_name %>.total_pages > 1 %>
       <div class="container small">
         <div class="row text-center my-3">
           <div class="col">
@@ -102,6 +111,6 @@
           </div>
         </div>
       </div>
-    <% end %>
-  <% end %>
+    <%% end %>
+  <%% end %>
 <%% end %>
