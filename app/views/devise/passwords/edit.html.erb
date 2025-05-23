@@ -7,9 +7,9 @@
       <div class="col-md-9 col-lg-10 order-md-1 order-2">
         <div class="row my-3">
           <div class="col-md-3 text-md-end">
-            <%= f.label :password, "New password", class: "form-label" %><br />
+            <%= f.label :password, "New password", class: "form-label" %>
             <% if @minimum_password_length %>
-              <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+              <em>(<%= @minimum_password_length %> characters minimum)</em>
             <% end %>
           </div>
           <div class="col-md">
@@ -18,7 +18,7 @@
         </div>
         <div class="row my-3">
           <div class="col-md-3 text-md-end">
-            <%= f.label :password_confirmation, "Confirm new password", class: "form-label" %><br />
+            <%= f.label :password_confirmation, "Confirm new password", class: "form-label" %>
           </div>
           <div class="col-md">
             <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>

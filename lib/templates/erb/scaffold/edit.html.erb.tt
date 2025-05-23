@@ -1,0 +1,4 @@
+<!-- lib/templates/erb/scaffold/new.html.erb.tt -->
+
+<%%= render 'layouts/page_title', page_title: "Edit <%= singular_table_name.titleize %>", page_subtitle: nil %>
+<%%= render "form", <%= singular_table_name %>: @<%= singular_table_name %> %>

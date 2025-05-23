@@ -1,0 +1,57 @@
+<!-- lib/templates/erb/scaffold/_form.html.erb.tt -->
+
+<div class="container border shadow bg-light bg-gradient">
+  <%%= form_with(model: <%= model_resource_name %>) do |form| %>
+    <%%= render 'layouts/error_messages', :current_model => <%= singular_table_name %> %>
+    <%% if <%= model_resource_name %>.new_record? %>
+      <%%= form.hidden_field :created_by, value: current_user.id %>
+    <%% end %>
+    <%%= form.hidden_field :updated_by, value: current_user.id %>
+    <div class="row my-3">
+      <div class="col-md-9 col-lg-10 order-md-1 order-2">
+<% attributes.each do |attribute| -%>
+        <div class="row my-3">
+          <div class="col-md-3 text-md-end">          
+  <% if attribute.password_digest? -%>
+            <%%= form.label :password, class: "form-label" %>
+          </div>
+          <div class="col-md">
+            <%%= form.password_field :password, class: "form-control" %>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-md-3 text-md-end">          
+            <%%= form.label :password_confirmation, class: "form-label" %>
+          </div>
+          <div class="cell medium-auto">
+            <%%= form.password_field :password_confirmation, class: "form-select" %>
+  <% else %>
+            <%%= form.label :<%= attribute.column_name %>, class: "form-label" %>
+          </div>
+          <div class="cell medium-auto">
+            <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, class: "form-control" %>
+  <% end %>
+          </div>
+        </div>
+<% end -%>
+      </div>
+      <div class="col-md-3 col-lg-2 order-md-2 order-1">
+        <div class="d-grid my-3">
+          <%%= f.submit "Update", class: "btn btn-primary" %>
+        </div>
+        <%% unless <%= model_resource_name %>.new_record? %>
+          <div class="d-grid my-3">
+            <%%= link_to <%= singular_table_name %>, class: "btn btn-secondary" do %>
+              <i class="fi-previous"></i>&nbsp;<%= singular_table_name.titleize %>
+            <%% end %>
+          </div>
+        <%% end %>
+        <div class="d-grid my-3">
+          <%%= link_to <%= index_helper %>_path, class: "btn btn-secondary" do %>
+            <i class="fi-previous"></i>&nbsp;<%= plural_table_name.titleize %>
+          <%% end %>
+        </div>
+      </div>
+    </div>
+  <%% end %>
+</div>
