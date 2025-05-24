@@ -7,22 +7,13 @@
   <% if user_signed_in? %>
     <li class="nav-item">
       <%= link_to users_path, class: "nav-link" do %>
-        <span class="fi-torsos -all"></span> Users
+        <span class="fi-torsos-all"></span> Users
       <% end %>
     </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Dropdown
-      </a>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
-      </ul>
-    </li>
     <li class="nav-item">
-      <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+      <%= link_to info_systems_path, class: "nav-link" do %>
+        <span class="fi-laptop"></span> Systems
+      <% end %>
     </li>
   <% end %>
 </ul>
@@ -43,14 +34,14 @@
             <li><hr class="dropdown-divider"></li>
             <li>
               <%= link_to destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" do %>
-                <span class="fi-lock"></span> Sign Out
+                <span class="fi-eject"></span> Sign Out
               <% end %>
             </li>
           </ul>
         </li>
       <% else %>
         <%= link_to login_path, class: "nav-link" do %>
-          <span class="fi-unlock"></span> Sign In
+          <span class="fi-play"></span> Sign In
         <% end %>
       <% end %>
     <% else %>

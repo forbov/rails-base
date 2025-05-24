@@ -1,4 +1,4 @@
-<%= render 'layouts/page_title', page_title: "Resend unlock instructions", page_subtitle: nil %>
+<%= render 'layouts/page_title', page_title: "Send unlock instructions", page_subtitle: nil %>
 <div class="container border shadow bg-light bg-gradient">
   <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
@@ -15,7 +15,9 @@
       </div>
       <div class="col-md-3 col-lg-2 order-md-1 order-2">
         <div class="d-grid my-3">
-          <%= f.submit "Send", class: "btn btn-primary" %>
+          <%= button_tag class: "btn btn-primary" do %>
+            <i class="fi-mail"></i>&nbsp;Send
+          <% end %>
         </div>
         <%= render "devise/shared/links" %>
       </div>

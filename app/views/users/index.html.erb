@@ -30,10 +30,14 @@
                 </div>
                 <div class="row my-3">
                   <div class="col-md-6 d-grid my-3">
-                    <%= submit_tag "Search", class: "btn btn-primary" %>
+                    <%= button_tag(class: "btn btn-primary") do %>
+                      <i class="fi-magnifying-glass"></i>&nbsp;Search
+                    <% end %>
                   </div>
                   <div class="col d-grid my-3">
-                    <%= link_to "All Users", users_path, class: "btn btn-primary" %>
+                    <%= link_to users_path, class: "btn btn-primary" do %>
+                      <i class="fi-list"></i>&nbsp;Clear
+                    <% end %>
                   </div>
                 </div>
               </div>
@@ -51,7 +55,9 @@
       <% if can? :create, User %>
         <% if current_user.admin? %>
           <div class="d-grid my-3">
-            <%= link_to "Add Administrator", new_user_invitation_path(user_role_id: "SYS_ADMIN"), class: "btn btn-primary" %>
+            <%= link_to new_user_invitation_path(user_role_id: "SYS_ADMIN"), class: "btn btn-primary" do %>
+              <i class="fi-plus"></i>&nbsp;New admin
+            <% end %>
           </div>
         <% end %>
       <% end %>

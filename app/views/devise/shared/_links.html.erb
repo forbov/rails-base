@@ -1,26 +1,36 @@
 <%- if controller_name != 'sessions' %>
   <div class="d-grid my-3">
-    <%= link_to "Log in", new_session_path(resource_name), class: "btn btn-secondary" %>
+    <%= link_to new_session_path(resource_name), class: "btn btn-secondary" do %>
+      <i class="fi-play"></i>&nbsp;Log in
+    <% end %>
   </div>
 <% end %>
-<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+<%- if devise_mapping.registerable? && controller_name != 'registrations' && User.any? == false %>
   <div class="d-grid my-3">
-    <%= link_to "Sign up", new_registration_path(resource_name), class: "btn btn-secondary" %>
+    <%= link_to new_registration_path(resource_name), class: "btn btn-secondary" do %>
+      <i class="fi-plus"></i>&nbsp;Sign up
+    <% end %>
   </div>
 <% end %>
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
   <div class="d-grid my-3">
-    <%= link_to "Forgot password?", new_password_path(resource_name), class: "btn btn-secondary" %>
+    <%= link_to new_password_path(resource_name), class: "btn btn-secondary" do %>
+      <i class="fi-key"></i>&nbsp;Forgot password?
+    <% end %>
   </div>
 <% end %>
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
   <div class="d-grid my-3">
-    <%= link_to "Confirmation instructions?", new_confirmation_path(resource_name), class: "btn btn-secondary" %>
+    <%= link_to new_confirmation_path(resource_name), class: "btn btn-secondary" do %>
+      <i class="fi-mail"></i>&nbsp;Confirmation instructions
+    <% end %>
   </div>
 <% end %>
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
   <div class="d-grid my-3">
-    <%= link_to "Unlock instructions?", new_unlock_path(resource_name), class: "btn btn-secondary" %>
+    <%= link_to new_unlock_path(resource_name), class: "btn btn-secondary" do %>
+      <i class="fi-unlock"></i>&nbsp;Unlock instructions
+    <% end %>
   </div>
 <% end %>
 <%- if devise_mapping.omniauthable? %>

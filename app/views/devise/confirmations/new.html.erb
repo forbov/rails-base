@@ -15,7 +15,9 @@
       </div>
       <div class="col-md-3 col-lg-2 order-md-1 order-2">
         <div class="d-grid my-3">
-          <%= f.submit "Send", class: "btn btn-primary" %>
+          <%= button_tag class: "btn btn-primary" do %>
+            <i class="fi-mail"></i>&nbsp;Send
+          <% end %>
         </div>
         <%= render "devise/shared/links" %>
       </div>

@@ -24,10 +24,14 @@
                 </div>
                 <div class="row my-3">
                   <div class="col-md-6 d-grid my-3">
-                    <%%= submit_tag "Search", class: "btn btn-primary" %>
+                    <%%= button_tag(class: "btn btn-primary") do %>
+                      <i class="fi-magnifying-glass"></i>&nbsp;Search
+                    <%% end %>
                   </div>
                   <div class="col d-grid my-3">
-                    <%%= link_to "All <%= plural_table_name.titleize %>", <%= index_helper %>_path, class: "btn btn-primary" %>
+                    <%%= link_to <%= plural_table_name %>_path, class: "btn btn-primary" do %>
+                      <i class="fi-list"></i>&nbsp;Clear
+                    <%% end %>
                   </div>
                 </div>
               </div>
@@ -39,12 +43,16 @@
   </div>
   <div class="row my-3">
     <div class="col-md-9 col-lg-10 order-md-1 order-2">
-      <%%= render '<%= plural_table_name %>', collection: @<%= plural_table_name %>, source: 'index', url: Rails.application.routes.url_helpers, current_user: current_user %>
+      <div class="d-grid my-3">
+        <%%= render '<%= plural_table_name %>', collection: @<%= plural_table_name %>, source: 'index', url: Rails.application.routes.url_helpers, current_user: current_user %>
+      </div>
     </div>
     <div class="col-md-3 col-lg-2 order-md-1 order-2">
       <%% if can? :create, <%= singular_table_name.titleize.gsub(' ', '') %> %>
         <div class="d-grid my-3">
-          <%%= link_to 'New', new_<%= singular_route_name %>_path, class: "btn btn-primary" %>
+          <%%= link_to new_<%= singular_route_name %>_path, class: "btn btn-primary" do %>
+            <i class="fi-plus"></i>&nbsp;New
+          <%% end %>
         </div>
       <%% end %>
     </div>
