@@ -6,15 +6,15 @@
     <div class="col-md-9 col-lg-10 order-md-1 order-2">
       <%%= render @<%= singular_table_name %>, <%= singular_table_name %>: @<%= singular_table_name %>, summary: false %>
     </div>
-    <div class="col-md-3 col-lg-2 order-md-2 order-1">
+    <div class="col-md-3 col-lg-2 order-md-1 order-2">
       <%% if can? :edit, @<%= singular_table_name %> %>
         <div class="d-grid my-3">
-          <%%= link_to 'Edit <%= singular_table_name.titleize %>', edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: "btn btn-primary" %>
+          <%%= link_to 'Edit', edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: "btn btn-primary" %>
         </div>
       <%% end %>
       <%% if can? :destroy, @<%= singular_table_name %> %>
         <div class="d-grid my-3">
-          <%%= link_to 'Delete <%= singular_table_name.titleize %>', @<%= singular_table_name %>, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+          <%%= link_to 'Delete', @<%= singular_table_name %>, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
         </div>
       <%% end %>
       <div class="d-grid my-3">
