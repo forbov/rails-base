@@ -31,7 +31,9 @@
     </div>
   </div>
   <%%# Keep the following section if the show screen has tabs/relationships to other entites %>
-  <%%= render 'layouts/bootstrap_tabs', bootstrap_tabs: @bootstrap_tabs %>
+  <div class="row">
+    <%%%= render 'layouts/bootstrap_tabs', bootstrap_tabs: @bootstrap_tabs %>
+  </div>
 </div>
 
 <%%# Move the following section to a file named '_<%= singular_table_name %>.html.erb' %>

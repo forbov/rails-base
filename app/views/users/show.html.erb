@@ -8,7 +8,7 @@
     </div>
     <div class="col-md-3 col-lg-2 order-md-1 order-2">
       <% if @user.id == current_user.id %>
-        <div class="d-grid my-3">
+        < class="d-grid my-3">
           <%= link_to edit_user_registration_path, class: "btn btn-primary" do %>
             <i class="fi-pencil"></i>&nbsp;Edit
           <% end %>
@@ -16,31 +16,33 @@
       <% end %>
       <% if can?(:resend, @user) && @user.created_by_invite? %>
         <% unless @user.invitation_accepted? %>
-          <%= button_to 'Resend Invite', resend_user_path(@user), {method: :patch, form_class: "d-grid my-3", class: "btn btn-primary"} do %>
+          <%= button_to resend_user_path(@user), {method: :patch, form_class: "d-grid my-3", class: "btn btn-primary"} do %>
             <i class="fi-mail"></i>&nbsp;Resend Invite
           <% end %>
         <% end %>
-      <% end %>
-      <% if can?(:lock_or_unlock, @user) && @user.id != current_user.id %>
-        <% if @user.access_locked? %>
-          <%= button_to lock_or_unlock_user_path(@user), {method: :patch, form_class: "d-grid my-3", class: "btn btn-primary"} do %>
-            <i class="fi-unlock"></i>&nbsp;Unlock
+        <% if can?(:lock_or_unlock, @user) && @user.id != current_user.id %>
+          <% if @user.access_locked? %>
+            <%= button_to lock_or_unlock_user_path(@user), {method: :patch, form_class: "d-grid my-3", class: "btn btn-primary"} do %>
+              <i class="fi-unlock"></i>&nbsp;Unlock
+            <% end %>
+          <% else %>
+            <%= button_to lock_or_unlock_user_path(@user), {method: :patch, form_class: "d-grid my-3", class: "btn btn-primary"} do %>
+              <i class="fi-lock"></i>&nbsp;Lock
+            <% end %>
+            <%= button_to user_path(@user), {data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, form_class: "d-grid my-3", class: "btn btn-danger"} do %>
+              <i class="fi-trash"></i>&nbsp;Delete
+            <% end %>
           <% end %>
-        <% else %>
-          <%= button_to lock_or_unlock_user_path(@user), {method: :patch, form_class: "d-grid my-3", class: "btn btn-primary"} do %>
-            <i class="fi-lock"></i>&nbsp;Lock
-          <% end %>
-          <%= button_to user_path(@user), {data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, form_class: "d-grid my-3", class: "btn btn-danger"} do %>
-            <i class="fi-trash"></i>&nbsp;Delete
-          <% end %>
+          <div class="d-grid my-3">
+            <%= link_to users_path, class: "btn btn-secondary" do %>
+              <i class="fi-previous"></i>&nbsp;Users
+            <% end %>
+          </div>
         <% end %>
-        <div class="d-grid my-3">
-          <%= link_to users_path, class: "btn btn-secondary" do %>
-            <i class="fi-previous"></i>&nbsp;Users
-          <% end %>
-        </div>
       <% end %>
     </div>
   </div>
-  <%= render 'layouts/bootstrap_tabs', bootstrap_tabs: @bootstrap_tabs %>
+  <div class="row">
+    <%= render 'layouts/bootstrap_tabs', bootstrap_tabs: @bootstrap_tabs %>
+  </div>
 </div>
