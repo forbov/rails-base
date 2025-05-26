@@ -26,7 +26,6 @@ class Users::InvitationsController < Devise::InvitationsController
 
       notice = "Invitation sent to #{user.email}, roles and relationships added."
     end
-    user.add_role(user_role.name) unless user.has_role? user_role.name
     user.send_new_user_email(current_user)
     user.add_role(user_role.name) unless user.has_role? user_role.name
     redirect_to users_path, notice:
