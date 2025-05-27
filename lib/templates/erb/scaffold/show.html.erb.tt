@@ -48,7 +48,7 @@
       <table class="table table-striped table-hover table-sm">
   <% elsif attribute.column_name != "active" && attribute.column_name != "created_by" && attribute.column_name != "updated_by" %>
         <tr>
-          <th class="medium-text-right"><%= attribute.human_name %></th>
+          <th class="text-end"><%= attribute.human_name %></th>
           <td><%%= <%= singular_table_name %>.<%= attribute.column_name %> %></td>
         </tr>
   <% end %>
