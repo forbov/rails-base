@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   allow_browser versions: :modern
 
   def configure_permitted_parameters
-    additional_attributes = %i[first_name last_name mobile_phone user_role_id created_by updated_by]
+    additional_attributes = %i[first_name last_name mobile_phone time_zone user_role_id created_by updated_by]
     devise_parameter_sanitizer.permit :account_update, keys: additional_attributes
     devise_parameter_sanitizer.permit :sign_up, keys: additional_attributes
     devise_parameter_sanitizer.permit :invite, keys: additional_attributes

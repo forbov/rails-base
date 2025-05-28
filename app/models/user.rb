@@ -9,6 +9,7 @@ class User < ApplicationRecord
   validates :first_name, presence: true, on: :create
   validates :last_name, presence: true, on: :create
   validates :mobile_phone, presence: true, uniqueness: true, on: :create
+  validates :time_zone, presence: true, on: :create
 
   attr_accessor :user_role_id
   attr_reader :raw_invitation_token

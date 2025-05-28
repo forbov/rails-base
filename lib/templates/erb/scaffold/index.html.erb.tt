@@ -92,8 +92,8 @@
     <% attribute_count += 1 %>
     <% if attribute_count == 1 %>
         <td>
-          <%% if can? :read, <%= singular_table_name %> %>
-            <%%= link_to <%= singular_table_name %>.<%= attribute.column_name %>, <%= singular_table_name %> %>
+          <%% if current_user.can? :read, <%= singular_table_name %> %>
+            <%%= link_to <%= singular_table_name %>.<%= attribute.column_name %>, url.<%= singular_table_name %>_path(<%= singular_table_name %>) %>
           <%% else %>
             <%%= <%= singular_table_name %>.<%= attribute.column_name %> %>
           <%% end %>

@@ -63,6 +63,7 @@ class InitialDatabase < ActiveRecord::Migration[8.0]
     t.string "first_name", limit: 50, null: false
     t.string "last_name", limit: 50, null: false
     t.string "mobile_phone", limit: 20, null: false
+    t.string "time_zone", limit: 50, default: "Melbourne", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
