@@ -53,6 +53,13 @@ module CodesHelper
     system_code.alt_desc
   end
 
+  def alt_code_desc2(code_type, code)
+    return unless code.present?
+
+    system_code = SystemCode.find([code_type, code])
+    system_code.alt_desc2
+  end
+
   def integer_value(code_type, code)
     return unless code.present?
 

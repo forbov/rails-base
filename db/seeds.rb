@@ -10,5 +10,7 @@
 require 'csv'
 
 require_relative '../lib/.seeds/system_codes/seeds'
+require_relative '../lib/.seeds/roles/seeds'
 
 load_system_codes
+load_roles

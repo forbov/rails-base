@@ -54,6 +54,7 @@ class InitialDatabase < ActiveRecord::Migration[8.0]
       t.string "code_desc", null: false
       t.integer "integer_value"
       t.string "alt_desc", limit: 500
+      t.string "alt_desc2", limit: 255
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end
@@ -63,7 +64,6 @@ class InitialDatabase < ActiveRecord::Migration[8.0]
     t.string "first_name", limit: 50, null: false
     t.string "last_name", limit: 50, null: false
     t.string "mobile_phone", limit: 20, null: false
-    t.string "time_zone", limit: 50, default: "Melbourne", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
