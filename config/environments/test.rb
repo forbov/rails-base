@@ -4,8 +4,8 @@
 # and recreated between test runs. Don't rely on the data there!
 
 Rails.application.configure do
+  config.host = '7burns.dyndns.org:1980' # replace with your own url
   # Settings specified here will take precedence over those in config/application.rb.
-  config.action_mailer.default_url_options = { host: '7burns.dyndns.org', port: 3000 }
 
   # While tests run files are not watched, reloading is not necessary.
   config.enable_reloading = false
@@ -35,10 +35,40 @@ Rails.application.configure do
   # Tell Action Mailer not to deliver emails to the real world.
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
-  config.action_mailer.delivery_method = :test
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: config.host }
 
-  # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "example.com" }
+  # SMTP settings for gmail
+  # config.action_mailer.smtp_settings = {
+  #   address: 'smtp.gmail.com',
+  #   port: 587,
+  #   user_name: Rails.application.credentials.dig(:test_smtp, :email),
+  #   password: Rails.application.credentials.dig(:test_smtp, :password),
+  #   domain: host,
+  #   authentication: 'plain',
+  #   enable_starttls_auto: true
+  # }
+
+  # Settings for sending emails via Bluehost SMTP server
+  # config.action_mailer.smtp_settings = {
+  #   address: 'smtp.oxcs.bluehost.com',
+  #   port: 587,
+  #   domain: 'computability.com.au', # Replace with your domain
+  #   user_name: ENV['TEST_EMAIL_ADDRESS'], # Replace with your full Bluehost email address
+  #   password: ENV['TEST_EMAIL_PASSWORD'], # Replace with your email password
+  #   authentication: :plain,
+  #   enable_starttls_auto: true
+  # }
+  # Settings for sending emails via Bluehost SMTP server
+  config.action_mailer.smtp_settings = {
+    address: 'mail.computability.com.au', # Replace with your Bluehost SMTP server address
+    port: 465,
+    user_name: ENV['TEST_CHELP_EMAIL_ADDRESS'], # Replace with your full Bluehost email address
+    password: ENV['TEST_CHELP_EMAIL_PASSWORD'], # Replace with your email password
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
+  config.action_mailer.perform_deliveries = true
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr

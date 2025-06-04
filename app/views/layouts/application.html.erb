@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Computability</title>
+    <title><%= APP_SHORT_NAME %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -9,18 +9,13 @@
     <%= csp_meta_tag %>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/801e4a4dd6.js" crossorigin="anonymous"></script>
-    <%= yield :head %>
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-    <%# <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png"> %>
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag "foundation-icons" %>
     <%= stylesheet_link_tag "actiontext" %>
     <%= stylesheet_link_tag "simple-calendar" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= favicon_link_tag "icon_for_website_small.png" %>
+    <link rel="apple-touch-icon" href="<%= FAVICON_LOGO %>">
+    <%= favicon_link_tag FAVICON_LOGO %>
+    <%= yield :head %>
     <%= javascript_importmap_tags %>
   </head>
   <body>

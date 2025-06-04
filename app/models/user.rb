@@ -28,8 +28,16 @@ class User < ApplicationRecord
     has_role? :SYS_ADMIN
   end
 
+  def user?
+    has_role? :SYS_USER
+  end
+
   def role_names
     roles.collect(&:name).join(", ")
+  end
+
+  def admin_users
+    User.with_role(:SYS_ADMIN).where(active: true)
   end
 
   def role_desc
@@ -52,7 +60,9 @@ class User < ApplicationRecord
     # Generate a new token for the user
     generate_token(current_user)
 
-    if admin?
+    if user?
+      WelcomeMailer.with(user: self, raw_token: raw_invitation_token).new_user_email.deliver_later
+    elsif admin?
       WelcomeMailer.with(user: self,
                          raw_token: raw_invitation_token).new_administrator_email.deliver_later
     end
