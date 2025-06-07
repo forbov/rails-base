@@ -34,6 +34,10 @@ port ENV.fetch("PORT", 3000)
 plugin :tmp_restart
 
 # Run the Solid Queue supervisor inside of Puma for single-server deployments
+########################################
+# Important: Set the following environment variable for solid queue to work with postgres:
+# OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+######################################
 plugin :solid_queue
 
 # Specify the PID file. Defaults to tmp/pids/server.pid in development.

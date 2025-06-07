@@ -57,9 +57,11 @@ class User < ApplicationRecord
     generate_token(current_user)
 
     if user?
-      SendNewUserEmailJob.perform_later(self, raw_invitation_token)
+      WelcomeMailer.with(user: self, raw_token: raw_invitation_token).new_user_email.deliver_later
+      # SendNewUserEmailJob.perform_later(self, raw_invitation_token)
     elsif admin?
-      SendNewAdminEmailJob.perform_later(self, raw_invitation_token)
+      WelcomeMailer.with(user: self, raw_token: raw_invitation_token).new_admin_email.deliver_later
+      # SendNewAdminEmailJob.perform_later(self, raw_invitation_token)
     end
   end
 
