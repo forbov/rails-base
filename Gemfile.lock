@@ -140,6 +140,8 @@ GEM
     et-orbi (1.2.11)
       tzinfo
     ffi (1.16.3)
+    font-awesome-sass (6.7.2)
+      sassc (~> 2.0)
     foundation_emails (2.2.1.0)
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
@@ -213,6 +215,16 @@ GEM
     mini_magick (4.12.0)
     mini_mime (1.1.5)
     minitest (5.25.5)
+    mission_control-jobs (1.0.2)
+      actioncable (>= 7.1)
+      actionpack (>= 7.1)
+      activejob (>= 7.1)
+      activerecord (>= 7.1)
+      importmap-rails (>= 1.2.1)
+      irb (~> 1.13)
+      railties (>= 7.1)
+      stimulus-rails
+      turbo-rails
     msgpack (1.8.0)
     net-imap (0.5.8)
       date
@@ -463,6 +475,7 @@ DEPENDENCIES
   debug
   devise
   devise_invitable
+  font-awesome-sass
   htmlbeautifier
   image_processing (~> 1.2)
   importmap-rails
@@ -471,6 +484,7 @@ DEPENDENCIES
   jquery-rails
   kamal
   kaminari
+  mission_control-jobs
   pg (~> 1.1)
   premailer-rails
   propshaft

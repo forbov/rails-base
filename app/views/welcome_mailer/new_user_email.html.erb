@@ -1,0 +1,35 @@
+                        
+<table class="card p-6 p-lg-10 space-y-4" role="presentation" border="0" cellpadding="0" cellspacing="0" style="border-radius: 6px; border-collapse: separate !important; width: 100%; overflow: hidden; border: 1px solid #e2e8f0;" bgcolor="#ffffff">
+  <tbody>
+    <tr>
+      <td style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 40px;" bgcolor="#ffffff">
+        <h1 class="h3 fw-700" style="padding-top: 0; padding-bottom: 0; font-weight: 700 !important; vertical-align: baseline; font-size: 28px; line-height: 33.6px; margin: 0; text-align: center">
+          <%= @app_name %>
+        </h1>
+        <hr>
+        <p class="" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; text-align: left">
+          <%= @user.first_name %>,
+        </p>
+        <br>
+        <p class="" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; text-align: left">
+          Welcome to Computability. Computability offers small firms and charities the ability to design and build a custom solution that matches the existing processes of your business in a way that you pay for the solution once and when you are realising its benefits.
+        </p>
+        <br>
+        <p class="" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; text-align: left">
+          You have been invited to join the <%= @app_name %> community as a <%= @user.role_desc %> for the following Computability System: <%= @user.info_systems_desc %>. Please <a href="<%= @invitation %>">accept the invitation</a>. This will enable you to raise and track Help tickets regarding any issues with your system.
+        </p>
+        <hr>
+        <br>
+        <table class="btn btn-primary p-3 fw-700 ax-center" role="presentation" border="0" cellpadding="0" cellspacing="0" style="border-radius: 6px; border-collapse: separate !important; font-weight: 700 !important; text-align: center" align="center">
+          <tbody>
+            <tr>
+              <td style="line-height: 24px; font-size: 16px; border-radius: 6px; font-weight: 700 !important; margin: 0; text-align: center" bgcolor="#00968f">
+                <a href="<%= @invitation %>" style="color: #ffffff; font-size: 16px; font-family: Helvetica, Arial, sans-serif; text-decoration: none; border-radius: 6px; line-height: 20px; display: block; font-weight: 700 !important; white-space: nowrap; background-color: #00968f; padding: 12px; border: 1px solid #00968f;">Accept Invitation</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>

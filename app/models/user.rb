@@ -36,10 +36,6 @@ class User < ApplicationRecord
     roles.collect(&:name).join(", ")
   end
 
-  def admin_users
-    User.with_role(:SYS_ADMIN).where(active: true)
-  end
-
   def role_desc
     role_desc_str = ""
     roles.each do |role|
@@ -61,11 +57,14 @@ class User < ApplicationRecord
     generate_token(current_user)
 
     if user?
-      WelcomeMailer.with(user: self, raw_token: raw_invitation_token).new_user_email.deliver_later
+      SendNewUserEmailJob.perform_later(self, raw_invitation_token)
     elsif admin?
-      WelcomeMailer.with(user: self,
-                         raw_token: raw_invitation_token).new_administrator_email.deliver_later
+      SendNewAdminEmailJob.perform_later(self, raw_invitation_token)
     end
+  end
+
+  def self.admin_users
+    User.with_role(:SYS_ADMIN).where(active: true)
   end
 
   def self.search(search_name, search_role)
