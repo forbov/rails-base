@@ -23,11 +23,13 @@
           <%% end %>
         </div>
       <%% end %>
-      <div class="d-grid my-3">
-        <%%= link_to <%= index_helper %>_path, class: "btn btn-secondary" do %>
-          <i class="fi-previous"></i>&nbsp;<%= plural_table_name.titleize %>
-        <%% end %>
-      </div>
+      <%% if can? :read, <%= singular_table_name.titleize %> %>
+        <div class="d-grid my-3">
+          <%%= link_to <%= index_helper %>_path, class: "btn btn-secondary" do %>
+            <i class="fi-previous"></i>&nbsp;<%= plural_table_name.titleize %>
+          <%% end %>
+        </div>
+      <%% end %>
     </div>
   </div>
   <%%# Keep the following section if the show screen has tabs/relationships to other entites %>
