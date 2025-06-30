@@ -36,6 +36,7 @@ module AppHelper
       @date.nil? ? "" : @date.to_time.strftime("%d %b %Y %I:%M %p")
     end
   end
+
   class BootstrapTabs
     def initialize(tabs, current_user, params = {})
       @tab_header = ""
@@ -98,19 +99,35 @@ module AppHelper
     end
   end
 
-  def dataset_as_csv(dataset, attributes, header, separator)
+  class DatasetProcessor
+    require "json"
     require "csv"
 
-    separator = "," if separator.nil?
-    header = true if header.nil?
+    def initialize(dataset, header: true, separator: ",")
+      @dataset = dataset
+      @header = header
+      @separator = separator
 
-    options = { col_sep: separator, encoding: "utf-8" }
+      if dataset.empty?
+        @attributes = []
+      else
+        @attributes = dataset.as_json.first.keys
+      end
+    end
 
-    CSV.generate(headers: header, **options) do |csv|
-      csv << attributes if header
+    def as_json
+      @dataset.as_json
+    end
 
-      dataset.each do |row|
-        csv << attributes.map { |attribute| row.send(attribute) }
+    def as_csv
+      options = { col_sep: @separator, encoding: "utf-8" }
+
+      CSV.generate(headers: @header, **options) do |csv|
+        csv << @attributes if @header
+
+        @dataset.each do |row|
+          csv << @attributes.map { |attribute| row.send(attribute) }
+        end
       end
     end
   end
