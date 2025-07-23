@@ -7,10 +7,10 @@ module AppHelper
   class DateFormatter
     def initialize(date, user)
       @date = nil
-      if date.is_a?(DateTime) || date.is_a?(Time)
+      if date.is_a?(DateTime)
         @date = date.in_time_zone(user.time_zone)
-      elsif date.is_a?(Date)
-        @date = date if date.is_a?(Date)
+      elsif date.is_a?(Date) || date.is_a?(ActiveSupport::TimeWithZone)
+        @date = date
       else
         @date = nil
       end
