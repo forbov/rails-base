@@ -51,6 +51,8 @@ module AppHelper
         @tab_header = nil
         @tab_body = nil
       else
+        ac = ActionController::Base.new
+        ac.view_context_class.include(ActionView::Helpers, ApplicationHelper)
         @tabs.each do |key, value|
           next if value[:dataset].empty?
 
@@ -60,9 +62,6 @@ module AppHelper
           tab_dataset = value[:dataset]
           tab_parent = value[:parent]
           tab_source = value[:source]
-
-          ac = ActionController::Base.new
-          ac.view_context_class.include(ActionView::Helpers, ApplicationHelper)
           tab_content = ac.render_to_string partial: "#{tab_render}/#{tab_render}", locals: { collection: tab_dataset,
                                                                                               source: tab_source,
                                                                                               parent: tab_parent,
@@ -83,11 +82,7 @@ module AppHelper
     end
 
     def is_empty?
-      if @first_tabs
-        true
-      else
-        false
-      end
+      @first_tab
     end
 
     def render_tab_header
