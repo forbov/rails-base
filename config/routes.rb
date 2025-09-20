@@ -5,6 +5,8 @@ Rails.application.routes.draw do
                                     invitations: "users/invitations" }
 
   get "users/:id" => "users#show", as: :user
+  get "/otp_entry" => "home#otp_entry", as: :otp_entry
+  post "/verify_otp" => "home#verify_otp", as: :verify_otp
 
   devise_scope :user do
     get "/sign-in" => "devise/sessions#new", :as => :login
@@ -16,6 +18,8 @@ Rails.application.routes.draw do
       patch :resend
       delete :destroy
       get :dashboard
+      patch :enable_otp
+      patch :disable_otp
     end
   end
 

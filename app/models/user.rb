@@ -32,6 +32,24 @@ class User < ApplicationRecord
     has_role? :SYS_USER
   end
 
+  def masked_email
+    return email if email.length <= 8
+
+    # Identify positions of '@' characters
+    # at_positions = str.chars.each_index.select { |i| str[i] == '@' }
+
+    # Mask middle characters except '@'
+    masked = email.chars.each_with_index.map do |char, i|
+      if i < 4 || i >= email.length - 4 || char == '@'
+        char
+      else
+        '*'
+      end
+    end
+
+    masked.join
+  end
+
   def role_names
     roles.collect(&:name).join(", ")
   end
@@ -63,6 +81,11 @@ class User < ApplicationRecord
       WelcomeMailer.with(user: self, raw_token: raw_invitation_token).new_admin_email.deliver_later
       # SendNewAdminEmailJob.perform_later(self, raw_invitation_token)
     end
+  end
+
+  def send_otp_email
+    otp_code = current_otp
+    WelcomeMailer.with(user: self, otp_code: otp_code).verification_email.deliver_later
   end
 
   def self.admin_users

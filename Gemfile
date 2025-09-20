@@ -46,6 +46,7 @@ gem "bootstrap", "~> 5.3.0"
 gem "jquery-rails"
 gem "devise"
 gem "devise_invitable"
+gem 'devise-two-factor'
 gem "inky-rb", require: "inky"
 gem "kaminari"
 gem "cancancan"

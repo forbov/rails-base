@@ -1,0 +1,34 @@
+<%= render 'layouts/page_title', page_title: "Verification Code Entry", page_subtitle: nil %>
+<div class="container border shadow bg-light bg-gradient">
+  <%= form_with url: verify_otp_path, method: :post do |form| %>
+    <div class="row my-3">
+      <div class="col-md-9 col-lg-10 order-md-1 order-2">
+        <div class="row my-3">
+          <div class="col-md">
+            <h5>Check your Email</h5>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-md">
+            A verification code was sent to <strong><%= @user.masked_email %></strong>.
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-md-3 text-md-end">
+            <%= form.label 'Verification code', class: "form-label" %>
+          </div>
+          <div class="col-md">
+            <%= form.text_field :otp_attempt, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-lg-2 order-md-1 order-2">
+        <div class="d-grid my-3">
+          <%= button_tag class: "btn btn-primary" do %>
+            <i class="fi-unlock"></i>&nbsp;Authenticate
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

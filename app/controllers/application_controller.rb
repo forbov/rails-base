@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit :account_update, keys: additional_attributes
     devise_parameter_sanitizer.permit :sign_up, keys: additional_attributes
     devise_parameter_sanitizer.permit :invite, keys: additional_attributes
+    devise_parameter_sanitizer.permit :sign_in, keys: [ :otp_attempt ]
   end
 
   rescue_from CanCan::AccessDenied do |_exception|

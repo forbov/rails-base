@@ -45,6 +45,19 @@ class UsersController < ApplicationController
     redirect_to users_path, notice: "User was successfully deleted."
   end
 
+  def disable_otp
+    @user.otp_required_for_login = false
+    @user.save!
+    redirect_to users_path, notice: "Two-factor authentication disabled"
+  end
+
+  def enable_otp
+    @user.otp_secret = User.generate_otp_secret
+    @user.otp_required_for_login = true
+    @user.save!
+    redirect_to users_path, notice: "Two-factor authentication enabled"
+  end
+
   private
   def set_user
     @user = User.find(params[:id])

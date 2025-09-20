@@ -79,6 +79,9 @@ class InitialDatabase < ActiveRecord::Migration[8.0]
       t.integer "failed_attempts", default: 0, null: false
       t.datetime "locked_at"
       t.string "unlock_token"
+      t.string "otp_secret"
+      t.integer "consumed_timestep"
+      t.boolean "otp_required_for_login"
       t.boolean "active", default: true, null: false
       t.bigint "created_by", null: false
       t.bigint "updated_by", null: false
