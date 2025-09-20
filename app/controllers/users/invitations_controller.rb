@@ -1,4 +1,5 @@
 class Users::InvitationsController < Devise::InvitationsController
+  include UsersHelper
   def new
     @user_role = Role.find_by(name: params[:user_role_id])
     @page_title = "New #{@user_role.description}"
@@ -29,7 +30,7 @@ class Users::InvitationsController < Devise::InvitationsController
 
     user.add_role(user_role.name) unless user.has_role? user_role.name
     user.send_new_user_email(current_user)
-    
+
     redirect_to users_path, notice:
   end
 
@@ -38,6 +39,11 @@ class Users::InvitationsController < Devise::InvitationsController
     # set this session parameters after accepting the passwords
     session[:user_email] = @user.email
     session[:user_role] = @user.role_desc
+
+    return unless @user.requires_2fa?
+
+    # Force enabling OTP for the user if their role requires 2FA
+    enable_otp_for_user(@user)
   end
 
   private

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
   before_action :authenticate_user!
-  before_action :set_user, only: %i[show dashboard lock_or_unlock resend destroy]
+  before_action :set_user, only: %i[show dashboard lock_or_unlock resend destroy disable_otp enable_otp]
   before_action :set_tabs, only: %i[show dashboard]
 
 
@@ -46,15 +46,12 @@ class UsersController < ApplicationController
   end
 
   def disable_otp
-    @user.otp_required_for_login = false
-    @user.save!
+    disable_otp_for_user(@user)
     redirect_to users_path, notice: "Two-factor authentication disabled"
   end
 
   def enable_otp
-    @user.otp_secret = User.generate_otp_secret
-    @user.otp_required_for_login = true
-    @user.save!
+    enable_otp_for_user(@user)
     redirect_to users_path, notice: "Two-factor authentication enabled"
   end
 

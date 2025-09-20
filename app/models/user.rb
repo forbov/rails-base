@@ -32,6 +32,13 @@ class User < ApplicationRecord
     has_role? :SYS_USER
   end
 
+  def requires_2fa?
+    roles.each do |role|
+      return true if role.requires_2fa?
+    end
+    false
+  end
+
   def masked_email
     return email if email.length <= 8
 

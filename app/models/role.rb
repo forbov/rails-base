@@ -20,4 +20,8 @@ class Role < ApplicationRecord
   def priority
     user_role_priority(name)
   end
+
+  def requires_2fa?
+    user_role_requires_2fa?(name)
+  end
 end

@@ -21,6 +21,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
       session[:user_email] = @user.email
       session[:user_role] = @user.role_desc
     end
+    if @user.requires_2fa?
+      enable_otp_for_user(@user)
+    end
   end
 
   # GET /resource/edit

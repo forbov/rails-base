@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module CodesHelper
-  STATE_CODE_TYPE = 'STATE'
-  GENDER_CODE_TYPE = 'GENDER'
-  USER_ROLE_CODE_TYPE = 'USER_ROLE'
+  STATE_CODE_TYPE = "STATE"
+  GENDER_CODE_TYPE = "GENDER"
+  USER_ROLE_CODE_TYPE = "USER_ROLE"
 
   def user_role_codes
     code_set(USER_ROLE_CODE_TYPE)
@@ -15,6 +15,10 @@ module CodesHelper
 
   def user_role_priority(the_code)
     integer_value(USER_ROLE_CODE_TYPE, the_code)
+  end
+
+  def user_role_requires_2fa?(the_code)
+    alt_code_desc(USER_ROLE_CODE_TYPE, the_code) == "2FA"
   end
 
   def state_codes
@@ -36,34 +40,34 @@ module CodesHelper
   private
 
   def code_set(code_type)
-    SystemCode.select(:code, :code_desc).where(code_type:).order('integer_value ASC, code ASC')
+    SystemCode.select(:code, :code_desc).where(code_type:).order("integer_value ASC, code ASC")
   end
 
   def code_desc(code_type, code)
     return unless code.present?
 
-    system_code = SystemCode.find([code_type, code])
+    system_code = SystemCode.find([ code_type, code ])
     system_code.code_desc
   end
 
   def alt_code_desc(code_type, code)
     return unless code.present?
 
-    system_code = SystemCode.find([code_type, code])
+    system_code = SystemCode.find([ code_type, code ])
     system_code.alt_desc
   end
 
   def alt_code_desc2(code_type, code)
     return unless code.present?
 
-    system_code = SystemCode.find([code_type, code])
+    system_code = SystemCode.find([ code_type, code ])
     system_code.alt_desc2
   end
 
   def integer_value(code_type, code)
     return unless code.present?
 
-    system_code = SystemCode.find([code_type, code])
+    system_code = SystemCode.find([ code_type, code ])
     system_code.integer_value
   end
 end
