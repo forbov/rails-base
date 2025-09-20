@@ -42,15 +42,12 @@ class User < ApplicationRecord
   def masked_email
     return email if email.length <= 8
 
-    # Identify positions of '@' characters
-    # at_positions = str.chars.each_index.select { |i| str[i] == '@' }
-
     # Mask middle characters except '@'
     masked = email.chars.each_with_index.map do |char, i|
-      if i < 4 || i >= email.length - 4 || char == '@'
+      if i < 4 || i >= email.length - 4 || char == "@"
         char
       else
-        '*'
+        "*"
       end
     end
 
