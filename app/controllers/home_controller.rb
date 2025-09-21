@@ -24,8 +24,6 @@ class HomeController < ApplicationController
   private
 
   def set_user
-    p "Session OTP Token in set_user: #{session[:otp_token]}"
     @user = User.find(session[:otp_token]) if session[:otp_token]
-    p "Set user to #{@user.email}"
   end
 end
