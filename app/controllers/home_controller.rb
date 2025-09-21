@@ -2,10 +2,10 @@ class HomeController < ApplicationController
   before_action :set_user, only: %i[otp_entry verify_otp]
 
   def welcome
-    if user_signed_in? 
+    if user_signed_in?
       redirect_to dashboard_user_path(current_user)
     else
-      render 'welcome'
+      render "welcome"
     end
   end
 
@@ -15,9 +15,9 @@ class HomeController < ApplicationController
     if @user.validate_and_consume_otp!(params[:otp_attempt])
       sign_in(@user)
       session.delete(:otp_token)
-      redirect_to after_sign_in_path_for(@user), notice: 'Signed in successfully.'
+      redirect_to after_sign_in_path_for(@user), notice: "Signed in successfully."
     else
-      redirect_to login_path, alert: 'Invalid two-factor code, please sign-in again.'
+      redirect_to login_path, alert: "Invalid two-factor code, please sign-in again."
     end
   end
 

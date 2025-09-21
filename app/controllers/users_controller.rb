@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  include AppHelper
+  include UsersHelper
+
   load_and_authorize_resource
   before_action :authenticate_user!
   before_action :set_user, only: %i[show dashboard lock_or_unlock resend destroy disable_otp enable_otp]
