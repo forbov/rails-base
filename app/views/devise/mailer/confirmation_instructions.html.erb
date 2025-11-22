@@ -1,5 +1,24 @@
-<p>Welcome <%= @email %>!</p>
-
-<p>You can confirm your account email through the link below:</p>
-
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<table class="card p-6 p-lg-10 space-y-4" role="presentation" border="0" cellpadding="0" cellspacing="0" style="border-radius: 6px; border-collapse: separate !important; width: 100%; overflow: hidden; border: 1px solid #e2e8f0;" bgcolor="#ffffff">
+  <tbody>
+    <tr>
+      <td style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 40px;" bgcolor="#ffffff">
+        <h1 class="h3 fw-700" style="padding-top: 0; padding-bottom: 0; font-weight: 700 !important; vertical-align: baseline; font-size: 28px; line-height: 33.6px; margin: 0; text-align: center">
+          TRACTION Programs Reporting System
+        </h1>
+        <hr>
+        <p class="" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; text-align: left">
+          <%= @email %>,
+        </p>
+        <br>
+        <p class="" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; text-align: left">
+          You can confirm your account email through the link below:
+        </p>
+        <hr>
+        <p class="" style="line-height: 48px; font-size: 36px; width: 100%; margin: 0; text-align: center">
+          <strong><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></strong>
+        </p>
+        <hr>
+      </td>
+    </tr>
+  </tbody>
+</table>

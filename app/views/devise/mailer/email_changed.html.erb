@@ -1,7 +1,27 @@
-<p>Hello <%= @email %>!</p>
-
-<% if @resource.try(:unconfirmed_email?) %>
-  <p>We're contacting you to notify you that your email is being changed to <%= @resource.unconfirmed_email %>.</p>
-<% else %>
-  <p>We're contacting you to notify you that your email has been changed to <%= @resource.email %>.</p>
-<% end %>
+<table class="card p-6 p-lg-10 space-y-4" role="presentation" border="0" cellpadding="0" cellspacing="0" style="border-radius: 6px; border-collapse: separate !important; width: 100%; overflow: hidden; border: 1px solid #e2e8f0;" bgcolor="#ffffff">
+  <tbody>
+    <tr>
+      <td style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 40px;" bgcolor="#ffffff">
+        <h1 class="h3 fw-700" style="padding-top: 0; padding-bottom: 0; font-weight: 700 !important; vertical-align: baseline; font-size: 28px; line-height: 33.6px; margin: 0; text-align: center">
+          TRACTION Programs Reporting System
+        </h1>
+        <hr>
+        <% if @resource.try(:unconfirmed_email?) %>
+          <p class="" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; text-align: left">
+            <%= @email %>,
+          </p>
+          <p class="" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; text-align: left">
+            We're contacting you to notify you that your email is being changed to <%= @resource.unconfirmed_email %>.
+          </p>
+        <% else %>
+          <p class="" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; text-align: left">
+            <%= @resource.first_name %>,
+          </p>
+          <p class="" style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; text-align: left">
+            We're contacting you to notify you that your email has been changed to <%= @resource.email %>.
+          </p>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
