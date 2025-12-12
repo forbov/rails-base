@@ -41,23 +41,38 @@ gem "thruster", require: false
 gem "image_processing", "~> 1.2"
 
 # Computability gems
-gem "sassc-rails"
 gem "bootstrap", "~> 5.3.0"
-gem "jquery-rails"
+gem "cancancan"
+gem "csv"
 gem "devise"
 gem "devise_invitable"
-gem 'devise-two-factor'
-gem "inky-rb", require: "inky"
-gem "kaminari"
-gem "cancancan"
+gem "devise-two-factor"
+gem "font-awesome-sass"
+gem "grape"
 gem "htmlbeautifier"
+gem "inky-rb", require: "inky"
+gem "jquery-rails"
+gem "kaminari"
+gem "mission_control-jobs"
+gem "nokogiri"
 gem "premailer-rails"
+gem "rest-client"
 gem "rolify"
+gem "sassc-rails"
 gem "simple_calendar"
-gem "csv"
-gem 'font-awesome-sass'
-gem 'mission_control-jobs'
+gem "whenever", require: false
 
+# Gems for zipping files
+gem "rubyzip", ">= 1.0.0"
+gem "zip-zip"
+
+# Gems for Microsoft Manipulation
+gem "docx"
+gem "docx_replace"
+gem "htmltoword"
+gem "rubyXL"
+gem "wicked_pdf"
+gem "wkhtmltopdf-binary"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -82,5 +97,5 @@ group :test do
 end
 
 group :production do
-  gem 'aws-sdk-s3', require: false
+  gem "aws-sdk-s3", require: false
 end
