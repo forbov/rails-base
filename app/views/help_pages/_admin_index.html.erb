@@ -1,0 +1,47 @@
+<% help_pages = collection %>
+<div class="row my-3">
+  <div class="col-md-9 col-lg-10 order-md-1 order-2">
+    <% unless help_pages.empty? %>
+      <% if source == 'index' %>
+        <% help_pages = Kaminari.paginate_array(help_pages).page(params[:page]) %>
+      <% end %>
+      <table class="table table-striped table-hover table-sm">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Page order</th>
+            <th>Active</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% help_pages.each do |help_page| %>
+            <tr>
+              <td><%= link_to help_page.title, edit_help_page_path(help_page) %></td>
+              <td><%= help_page.page_order %></td>
+              <td><%= help_page.active %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <% if source == 'index' %>
+        <% if help_pages.total_pages > 1 %>
+          < class="container small">
+            <div class="row text-center my-3">
+              <div class="col">
+                <%= paginate help_pages %>
+                <%= page_entries_info help_pages %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col-md-3 col-lg-2 order-md-1 order-2">
+    <div class="d-grid my-3">
+      <%= link_to new_help_page_path, class: "button expanded" do %>
+        <i class="fi-plus"></i> New
+      <% end %>
+    </div>
+  </div>
+</div>

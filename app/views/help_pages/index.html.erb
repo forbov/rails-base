@@ -1,0 +1,9 @@
+<!-- lib/templates/erb/scaffold/index.html.erb.tt -->
+<%= render 'layouts/page_title', page_title: "Help", page_subtitle: nil %>
+<div class="container border shadow bg-light bg-gradient">
+  <% if current_user.admin? %>
+    <%= render 'admin_index', help_pages: @help_pages %>
+  <% else %>
+    <%= render 'display_help', help_pages: @help_pages %>
+  <% end %>
+</div>

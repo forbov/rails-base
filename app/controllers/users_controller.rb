@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  include AppHelper
+  include ApplicationHelper
   include UsersHelper
 
   load_and_authorize_resource
@@ -56,6 +56,11 @@ class UsersController < ApplicationController
   def enable_otp
     enable_otp_for_user(@user)
     redirect_to users_path, notice: "Two-factor authentication enabled"
+  end
+
+  def issue_api_token
+    @user.update!(api_token: SecureRandom.hex(32))
+    redirect_to request.referer, notice: "API token issued: #{@user.api_token}. Use this token for authenticating API requests."
   end
 
   private

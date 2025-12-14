@@ -47,4 +47,4 @@ test:
 # URL environment variable explicitly:
 #
 production:
-  url: <%= ENV["DATABASE_URL"] %>
+  url: <%= Rails.application.credentials.dig(:production, :database_url) %>

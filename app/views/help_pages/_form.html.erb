@@ -1,0 +1,61 @@
+<!-- lib/templates/erb/scaffold/_form.html.erb.tt -->
+<%= render 'layouts/error_messages', current_model: help_page %>
+<div class="container border shadow bg-light bg-gradient">
+  <%= form_with(model: help_page) do |form| %>
+    <div class="row my-3">
+      <div class="col-md-9 col-lg-10 order-md-1 order-2">
+        <div class="row my-3">
+          <div class="col-md-3 text-md-end">
+            <%= form.label :title, class: "form-label" %>
+          </div>
+          <div class="col-md">
+            <%= form.text_field :title, class: "form-control" %>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-md-3 text-md-end">
+            <%= form.label :page_order, class: "form-label" %>
+          </div>
+          <div class="col-md">
+            <%= form.number_field :page_order, class: "form-control" %>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-md-3 text-md-end">
+            <%= form.label :active, class: "form-label" %>
+          </div>
+          <div class="col-md">
+            <%= form.check_box :active, class: "form-check-input" %>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-md-3 text-md-end">
+            <%= form.label :details, class: "form-label" %>
+          </div>
+          <div class="col-md">
+            <%= form.rich_text_area :details, placeholder: "Format help text for the topic" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-lg-2 order-md-1 order-2">
+        <div class="d-grid my-3">
+          <%= form.submit do %>
+            <i class="fi-save"></i>&nbsp;Save
+          <% end %>
+        </div>
+        <% if !help_page.new_record? %>
+          <div class="d-grid my-3">
+            <%= link_to help_page, class: "btn btn-secondary" do %>
+              <i class="fi-eye"></i>&nbsp;Show
+            <% end %>
+          <% end %>
+        </div>
+        <div class="d-grid my-3">
+          <%= link_to help_pages_path, class: "btn btn-secondary" do %>
+            <i class="fi-previous"></i>&nbsp;Help Pages
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

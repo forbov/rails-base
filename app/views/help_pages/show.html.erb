@@ -1,0 +1,23 @@
+<!-- lib/templates/erb/scaffold/show.html.erb.tt -->
+<%= render 'layouts/page_title', page_title: "Help Page", page_subtitle: nil %>
+<div class="container border shadow bg-light bg-gradient">
+  <div class="row my-3">
+    <div class="col-md-9 col-lg-10 order-md-1 order-2">
+      <div class="d-grid my-3">
+        <%= render @help_page, help_page: @help_page %>
+      </div>
+    </div>
+    <div class="col-md-3 col-lg-2 order-md-1 order-2">
+      <div class="d-grid my-3">
+        <%= link_to edit_help_page_path(@help_page), class: "btn btn-primary" do %>
+          <i class="fi-pencil"></i>&nbsp;Edit
+        <% end %>
+      </div>
+      <div class="d-grid my-3">
+        <%= link_to help_pages_path, class: "btn btn-secondary" do %>
+          <i class="fi-previous"></i>&nbsp;Help Pages
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

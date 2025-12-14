@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       get :dashboard
       patch :enable_otp
       patch :disable_otp
+      patch :issue_api_token
     end
   end
 

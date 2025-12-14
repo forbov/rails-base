@@ -1,0 +1,23 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title"><%= help_page.title %></h5>
+    <div class="card-text">
+      <table class="table table-striped table-hover table-sm">
+        <tr>
+          <th class="md-text-end">Page order</th>
+          <td><%= help_page.page_order %></td>
+        </tr>
+        <tr>
+          <th class="md-text-end">Active</th>
+          <td><%= render "layouts/icons_helper", field_value: help_page.active, field_type: :boolean %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col">
+      <strong>Details:</strong>
+      <p><%= help_page.details %></p>
+    </div>
+  </div>
+</div>
