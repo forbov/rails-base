@@ -38,4 +38,5 @@ Rails.application.routes.draw do
   root "home#welcome"
 
   mount MissionControl::Jobs::Engine, at: "/jobs"
+  mount API::Base, at: '/'
 end
