@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="col-md-3 col-lg-2 order-md-1 order-2">
-      <%% if can? :edit, @<%= singular_table_name %> %>
+      <%% if can? :update, @<%= singular_table_name %> %>
         <div class="d-grid my-3">
           <%%= link_to edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: "btn btn-primary" do %>
             <i class="fi-pencil"></i>&nbsp;Edit
@@ -47,15 +47,17 @@
   <% if attribute_count == 1 %>
     <h5 class="card-title"><%%= <%= singular_table_name %>.<%= attribute.column_name %> %></h5>
     <div class="card-text">
-      <table class="table table-striped table-hover table-sm">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover table-sm">
   <% elsif attribute.column_name != "active" && attribute.column_name != "created_by" && attribute.column_name != "updated_by" %>
-        <tr>
-          <th class="text-end"><%= attribute.human_name %></th>
-          <td><%%= <%= singular_table_name %>.<%= attribute.column_name %> %></td>
-        </tr>
+          <tr>
+            <th class="text-end"><%= attribute.human_name %></th>
+            <td><%%= <%= singular_table_name %>.<%= attribute.column_name %> %></td>
+          </tr>
   <% end %>
 <% end -%>
-      </table>
+        </table>
+      </div>
     </div>
   </div>
 </div>

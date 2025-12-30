@@ -67,48 +67,50 @@
   <%% if source == 'index' %>
     <%% <%= plural_table_name %> = Kaminari.paginate_array(<%= plural_table_name %>).page(params[:page]) %>
   <%% end %>
-  <table class="table table-striped table-hover table-sm">
-    <thead>
-      <tr>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover table-sm">
+      <thead>
+        <tr>
 <% attribute_count = 0 %>        
 <% attributes.reject(&:password_digest?).each do |attribute| -%>
-  <% if attribute.column_name != "active" && attribute.column_name != "created_by" && attribute.column_name != "updated_by" %>
-    <% attribute_count += 1 %>
-    <% if attribute_count != 1  %>
-        <%%# To hide on small screens: %>
-        <th class="d-none d-md-table-cell"><%= attribute.human_name %></th>
+    <% if attribute.column_name != "active" && attribute.column_name != "created_by" && attribute.column_name != "updated_by" %>
+      <% attribute_count += 1 %>
+      <% if attribute_count != 1  %>
+          <%%# To hide on small screens: %>
+          <th class="d-none d-md-table-cell"><%= attribute.human_name %></th>
+      <% end %>
+          <th><%= attribute.human_name %></th>
     <% end %>
-        <th><%= attribute.human_name %></th>
-  <% end %>
 <% end %>
-      </tr>
-    </thead>
-    <tbody>
-      <%% <%= plural_table_name %>.each do |<%= singular_table_name %>| %>
-      <tr>
+        </tr>
+      </thead>
+      <tbody>
+        <%% <%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+        <tr>
 <% attribute_count = 0 %>        
 <% attributes.reject(&:password_digest?).each do |attribute| -%>
-  <% if attribute.column_name != "active" && attribute.column_name != "created_by" && attribute.column_name != "updated_by" %>
-    <% attribute_count += 1 %>
-    <% if attribute_count == 1 %>
-        <td>
-          <%% if current_user.can? :read, <%= singular_table_name %> %>
-            <%%= link_to <%= singular_table_name %>.<%= attribute.column_name %>, url.<%= singular_table_name %>_path(<%= singular_table_name %>) %>
-          <%% else %>
-            <%%= <%= singular_table_name %>.<%= attribute.column_name %> %>
-          <%% end %>
-        </td>
-    <% else %>
-        <%%# To hide on small screens: %>
-        <td class="d-none d-md-table-cell"><%%= <%= singular_table_name %>.<%= attribute.column_name %> %></td>
-        <td><%%= <%= singular_table_name %>.<%= attribute.column_name %> %></td>
-    <% end %>
-  <% end %>          
+    <% if attribute.column_name != "active" && attribute.column_name != "created_by" && attribute.column_name != "updated_by" %>
+      <% attribute_count += 1 %>
+      <% if attribute_count == 1 %>
+          <td>
+            <%% if current_user.can? :read, <%= singular_table_name %> %>
+              <%%= link_to <%= singular_table_name %>.<%= attribute.column_name %>, url.<%= singular_table_name %>_path(<%= singular_table_name %>) %>
+            <%% else %>
+              <%%= <%= singular_table_name %>.<%= attribute.column_name %> %>
+            <%% end %>
+          </td>
+      <% else %>
+          <%%# To hide on small screens: %>
+          <td class="d-none d-md-table-cell"><%%= <%= singular_table_name %>.<%= attribute.column_name %> %></td>
+          <td><%%= <%= singular_table_name %>.<%= attribute.column_name %> %></td>
+      <% end %>
+    <% end %>          
 <% end %>
-      </tr>
-    <%% end %>
-    </tbody>
-  </table>
+        </tr>
+      <%% end %>
+      </tbody>
+    </table>
+  </div>
   <%% if source == 'index' %>
     <%% if <%= plural_table_name %>.total_pages > 1 %>
       <div class="container small">
